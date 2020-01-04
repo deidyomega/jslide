@@ -11,8 +11,6 @@ import java.awt.image.BufferedImage;
 import java.awt.Graphics2D;
 import javax.swing.ImageIcon;
 
-
-
 /**
  * An <CODE>Icon</CODE> that scales its image to fill the component area,
  * excluding any border or insets, optionally maintaining the image's aspect

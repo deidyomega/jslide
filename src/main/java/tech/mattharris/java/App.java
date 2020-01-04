@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
@@ -40,10 +41,16 @@ public final class App extends JFrame {
         this.setLayout(new GridLayout(gridSize, gridSize));
         this.addKeyListener(new MKeyListener());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        this.setUndecorated(true);
         this.setTitle("Sexy");
         this.setResizable(true);
+
+        if (properties.fullscreen) {
+            this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            this.setUndecorated(true);
+        } else {
+            this.setPreferredSize(new Dimension(400, 300));
+            this.pack();
+        }
 
         p.setBackground(Color.BLACK);
 
@@ -78,8 +85,6 @@ public final class App extends JFrame {
             if (file.getName().toLowerCase().endsWith("gif") || file.getName().toLowerCase().endsWith("png")
                     || file.getName().toLowerCase().endsWith("jpg") || file.getName().toLowerCase().endsWith("jpeg")) {
                 files.add(file.getAbsolutePath());
-            } else {
-                System.out.println(file.getName().toLowerCase());
             }
         }
 

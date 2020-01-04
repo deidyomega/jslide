@@ -9,6 +9,8 @@ public class PropReader {
     String location = "";
     String speed = "";
     String grid = "";
+    boolean fullscreen = false;
+
     PropReader() throws IOException {
         InputStream inputStream = null;
         try {
@@ -27,6 +29,7 @@ public class PropReader {
             location = prop.getProperty("location");
             speed = prop.getProperty("speed");
             grid = prop.getProperty("grid");
+            fullscreen = prop.getProperty("fullscreen").equals("TRUE");
 
         } catch (Exception e) {
             System.out.println("Exception: " + e);
