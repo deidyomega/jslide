@@ -14,8 +14,8 @@ public class PropReader {
     PropReader() throws IOException {
         InputStream inputStream = null;
         try {
-            Properties prop = new Properties();
-            String propFileName = "config.properties";
+            final Properties prop = new Properties();
+            final String propFileName = "config.properties";
 
             inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
 
@@ -31,7 +31,7 @@ public class PropReader {
             grid = prop.getProperty("grid");
             fullscreen = prop.getProperty("fullscreen").equals("TRUE");
 
-        } catch (Exception e) {
+        } catch (final Exception e) {
             System.out.println("Exception: " + e);
             System.exit(-1);
         }

@@ -6,9 +6,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.image.ImageObserver;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-import java.awt.Graphics2D;
 import javax.swing.ImageIcon;
 
 /**
@@ -26,6 +23,7 @@ import javax.swing.ImageIcon;
  *
  * @version 1.0 03/27/12
  * @author Darryl
+ * @see http://www.camick.com/java/source/StretchIcon.java
  */
 @SuppressWarnings("serial") // Same-version serialization only
 public class StretchIcon extends ImageIcon {
@@ -43,7 +41,7 @@ public class StretchIcon extends ImageIcon {
      *
      * @see ImageIcon#ImageIcon(java.lang.String)
      */
-    public StretchIcon(String filename) {
+    public StretchIcon(final String filename) {
         super(filename);
     }
 
@@ -68,12 +66,12 @@ public class StretchIcon extends ImageIcon {
      * @see ImageIcon#paintIcon(java.awt.Component, java.awt.Graphics, int, int)
      */
     @Override
-    public synchronized void paintIcon(Component c, Graphics g, int x, int y) {
-        Image image = getImage();
+    public synchronized void paintIcon(final Component c, final Graphics g, int x, int y) {
+        final Image image = getImage();
         if (image == null) {
             return;
         }
-        Insets insets = ((Container) c).getInsets();
+        final Insets insets = ((Container) c).getInsets();
         x = insets.left;
         y = insets.top;
 
@@ -95,13 +93,7 @@ public class StretchIcon extends ImageIcon {
             }
         }
 
-        ImageObserver io = getImageObserver();
-
-        BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_4BYTE_ABGR);
-        Graphics2D g2d = bi.createGraphics();
-        g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY));
-        g2d.drawImage(image, 0, 0, w, h, io == null ? c : io);
-        g2d.dispose();
+        final ImageObserver io = getImageObserver();
 
         g.drawImage(image, x, y, w, h, io == null ? c : io);
     }
