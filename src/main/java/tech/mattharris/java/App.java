@@ -19,6 +19,11 @@ import java.io.IOException;
 
 public final class App extends JFrame {
 
+    /**
+     * This is the main application
+     */
+    private static final long serialVersionUID = 1L;
+
     private App() throws IOException {
         PropReader properties = new PropReader();
         int gridSize = Integer.parseInt(properties.grid);
@@ -26,8 +31,6 @@ public final class App extends JFrame {
         JLabel[] imageLabelAr = new JLabel[numOfItems];
         List<String> files = getFiles(properties.location);
         Container p = this.getContentPane();
-
-
 
         for (int i = 0; i < numOfItems; i++) {
             imageLabelAr[i] = new JLabel(new StretchIcon(files.get(i)));
@@ -40,10 +43,13 @@ public final class App extends JFrame {
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setUndecorated(true);
         this.setTitle("Sexy");
+        this.setResizable(true);
+
         p.setBackground(Color.BLACK);
 
         Timer t = new Timer(Integer.parseInt(properties.speed), new ActionListener() {
             int x = numOfItems;
+
             public void actionPerformed(ActionEvent e) {
                 x++;
                 imageLabelAr[x % numOfItems].setIcon(new StretchIcon(files.get(x % files.size())));
@@ -69,10 +75,8 @@ public final class App extends JFrame {
 
         assert listOfFiles != null;
         for (File file : listOfFiles) {
-            if (file.getName().toLowerCase().endsWith("gif")
-                || file.getName().toLowerCase().endsWith("png")
-                || file.getName().toLowerCase().endsWith("jpg")
-                || file.getName().toLowerCase().endsWith("jpeg")) {
+            if (file.getName().toLowerCase().endsWith("gif") || file.getName().toLowerCase().endsWith("png")
+                    || file.getName().toLowerCase().endsWith("jpg") || file.getName().toLowerCase().endsWith("jpeg")) {
                 files.add(file.getAbsolutePath());
             } else {
                 System.out.println(file.getName().toLowerCase());
